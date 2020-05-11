@@ -13,13 +13,13 @@ To run this python script you need a maze file. It must be written with strings.
 To run this program you must have python 3 installed. Then you need the numpy dependency. You can install the required dependencies using:
 
 ```
-pip3 install -r requirements.txt
+$ pip3 install -r requirements.txt
 ```
 
 Then you are ready to run the script:
 
 ```
-python3 main.py maze.txt
+$ python3 main.py maze.txt
 ```
 
 The script accepts the following flags:
@@ -34,7 +34,7 @@ The script accepts the following flags:
 Example, to run the maze with a population of 101 chromosomes, run:
 
 ```
-python3 main.py maze.txt -p 101
+$ python3 main.py maze.txt -p 101
 ```
 
 ## What is the heuristic function
