@@ -12,7 +12,7 @@ class GA:
         self.population = np.random.randint(
             0, 9, (self.POPULATION_SIZE, self.MOVE_LIMIT)
         )
-        self.maze1 = Maze(maze)
+        self.current_maze = Maze(maze)
 
     def fitness(self, chromosome):
         moves = []
@@ -20,49 +20,49 @@ class GA:
             if chromosome[i] == 0:
                 moves.append(0)
             elif chromosome[i] == 1:
-                moves.append(self.maze1.move_player_up())
+                moves.append(self.current_maze.move_player_up())
             elif chromosome[i] == 2:
-                moves.append(self.maze1.move_player_down())
+                moves.append(self.current_maze.move_player_down())
             elif chromosome[i] == 3:
-                moves.append(self.maze1.move_player_left())
+                moves.append(self.current_maze.move_player_left())
             elif chromosome[i] == 4:
-                moves.append(self.maze1.move_player_right())
+                moves.append(self.current_maze.move_player_right())
             elif chromosome[i] == 5:
-                moves.append(self.maze1.move_player_up_right())
+                moves.append(self.current_maze.move_player_up_right())
             elif chromosome[i] == 6:
-                moves.append(self.maze1.move_player_up_left())
+                moves.append(self.current_maze.move_player_up_left())
             elif chromosome[i] == 7:
-                moves.append(self.maze1.move_player_down_right())
+                moves.append(self.current_maze.move_player_down_right())
             elif chromosome[i] == 8:
-                moves.append(self.maze1.move_player_down_left())
+                moves.append(self.current_maze.move_player_down_left())
         score = self.sum_score(moves, chromosome)
-        self.maze1.reset_player()
+        self.current_maze.reset_player()
         return score
 
     def sum_score(self, moves, chromosome):
         score = 0
         for i in range(0, len(moves)):
-            if moves[i] == self.maze1.WALL:
+            if moves[i] == self.current_maze.WALL:
                 score += 1
-            elif moves[i] == self.maze1.FINISH:
+            elif moves[i] == self.current_maze.FINISH:
                 np.put(chromosome, list(range(i + 1, chromosome.size)), 0)
                 score += round(
                     math.sqrt(
                         (
-                            self.maze1.finishPosition[0]
-                            - self.maze1.playerCurrentPosition[0]
+                            self.current_maze.finishPosition[0]
+                            - self.current_maze.playerCurrentPosition[0]
                         )
                         ** 2
                         + (
-                            self.maze1.finishPosition[1]
-                            - self.maze1.playerCurrentPosition[1]
+                            self.current_maze.finishPosition[1]
+                            - self.current_maze.playerCurrentPosition[1]
                         )
                         ** 2
                     ),
                     2,
                 )
                 break
-        if self.maze1.FINISH not in moves:
+        if self.current_maze.FINISH not in moves:
             score += 1000
         return chromosome, score
 
@@ -128,10 +128,10 @@ class GA:
         return chromosome
 
     def get_start_finish_coordinates(self, moves):
-        start_coordinates = self.maze1.fixed_start_position
+        start_coordinates = self.current_maze.fixed_start_position
         end_coordinates = [
-            self.maze1.fixed_start_position[0],
-            self.maze1.fixed_start_position[1],
+            self.current_maze.fixed_start_position[0],
+            self.current_maze.fixed_start_position[1],
         ]
         for i in moves:
             if i == 1:

@@ -70,21 +70,21 @@ def main():
         + ", iterations="
         + str(iterations)
     )
-    ga1 = GA(move, population, mutation, args.maze)
-    x = ga1.search_optional_moves(ga1.population, iterations)
-    if x is None:
+    genetic_algorithm = GA(move, population, mutation, args.maze)
+    route = genetic_algorithm.search_optional_moves(genetic_algorithm.population, iterations)
+    if route is None:
         print("Solução não encontrada")
     else:
         print("Exit found!")
-        print("Chromosome with moves: " + str(x[0]))
-        print("Start: " + str(x[1][0]) + " End: " + str(x[1][1]))
+        print("Chromosome with moves: " + str(route[0]))
+        print("Start: " + str(route[1][0]) + " End: " + str(route[1][1]))
         print("Starting A*")
         print("Creating graph")
-        graph = Graph(ga1.maze1.Board)
+        graph = Graph(genetic_algorithm.current_maze.Board)
         print("Graph created")
         print("Starting algorithm processing")
-        came_from, cost_so_far = a_star_search(graph, x[1][0], x[1][1])
-        best_path = reconstruct_path(came_from, x[1][0], x[1][1])
+        came_from, cost_so_far = a_star_search(graph, route[1][0], route[1][1])
+        best_path = reconstruct_path(came_from, route[1][0], route[1][1])
         print("Best path found! It's:")
         print(best_path)
 
