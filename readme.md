@@ -6,7 +6,7 @@ I developed this program using genetic algorithms and refining the solution with
 
 ## What you need to run this program
 
-To run this python script you need a maze file. It must be written with strings. 0 represents floor; 1 represents walls; B represents holes (similar to walls); E represents entrance (where the player starts); S represents exit (the final solution). Check the "maze1.txt" file for an example.
+To run this python script you need a maze file. It must be written with strings. 0 represents floor; 1 represents walls; B represents holes (similar to walls); E represents entrance (where the player starts); S represents exit (the final solution). Check the "maze.txt" file for an example.
 
 ## How to run this program
 
