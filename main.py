@@ -73,7 +73,7 @@ def main():
     genetic_algorithm = GA(move, population, mutation, args.maze)
     route = genetic_algorithm.search_optional_moves(genetic_algorithm.population, iterations)
     if route is None:
-        print("Solução não encontrada")
+        print("Solution not found")
     else:
         print("Exit found!")
         print("Chromosome with moves: " + str(route[0]))
