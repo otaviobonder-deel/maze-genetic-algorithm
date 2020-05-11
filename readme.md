@@ -10,7 +10,7 @@ To run this python script you need a maze file. It must be written with strings.
 
 ## How to run this program
 
-To run this program you must have python 3 installed. Then you need the numpy dependence. You can install the required dependencies using:
+To run this program you must have python 3 installed. Then you need the numpy dependency. You can install the required dependencies using:
 
 `pip3 install -r requirements.txt`
 
