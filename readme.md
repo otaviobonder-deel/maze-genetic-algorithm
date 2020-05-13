@@ -1,6 +1,6 @@
 # Genetic algorithm to solve a maze problem, with A* to execute the best route
 
-This program was implemented as an exercise to the IA discipline in the course of Software Engineering.
+This program was implemented as an exercise to the Artificial Inteligence discipline in the course of Software Engineering.
 
 I developed this program using genetic algorithms and refining the solution with A*.
 
