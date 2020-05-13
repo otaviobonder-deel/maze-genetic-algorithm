@@ -80,6 +80,7 @@ def main():
         print("Exit found!")
         print("Chromosome with moves: " + str(route[0]))
         print("Start: " + str(route[1][0]) + " End: " + str(route[1][1]))
+        print("List of coordinates that player moved: " + str(route[2]))
         print("Starting A*")
         print("Creating graph")
         graph = Graph(genetic_algorithm.current_maze.Board)

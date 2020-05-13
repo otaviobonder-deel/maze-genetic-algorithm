@@ -19,24 +19,7 @@ class GA:
     ):  # move the player to each of the chromosomes movements
         moves = []
         for i in range(0, chromosome.size):
-            if chromosome[i] == 0:
-                moves.append(0)
-            elif chromosome[i] == 1:
-                moves.append(self.current_maze.move_player_up())
-            elif chromosome[i] == 2:
-                moves.append(self.current_maze.move_player_down())
-            elif chromosome[i] == 3:
-                moves.append(self.current_maze.move_player_left())
-            elif chromosome[i] == 4:
-                moves.append(self.current_maze.move_player_right())
-            elif chromosome[i] == 5:
-                moves.append(self.current_maze.move_player_up_right())
-            elif chromosome[i] == 6:
-                moves.append(self.current_maze.move_player_up_left())
-            elif chromosome[i] == 7:
-                moves.append(self.current_maze.move_player_down_right())
-            elif chromosome[i] == 8:
-                moves.append(self.current_maze.move_player_down_left())
+            moves.append(self.current_maze.move_player(chromosome[i]))
         score = self.sum_score(moves, chromosome)
         self.current_maze.reset_player()
         return score
@@ -198,6 +181,7 @@ class GA:
                 return (
                     most_fit_score[0][0],
                     self.get_start_finish_coordinates(most_fit_score[0][0]),
+                    self.current_maze.decode_chromosome(most_fit_score[0][0])
                 )
             else:  # if the soloution was not found, try again keeping the best chromosome
                 print(

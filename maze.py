@@ -7,14 +7,16 @@ class Maze:
         self.FLOOR = 0
         self.PLAYER = 9
         self.FINISH = 7
-
-        self.Board = np.empty((0, 10), dtype=np.int16)
+        self.number_of_lines = len(open(maze).readlines())
+        self.number_of_columns = 0
+        self.Board = np.empty((0, self.number_of_lines), dtype=np.int16)
 
         with open(maze, "r") as reader:
             for line in reader:
                 line = line.strip()
                 line_list = []
                 for char in line:
+                    self.number_of_columns += 1
                     if char == "E":
                         char = 9
                     if char == "S":
@@ -23,6 +25,7 @@ class Maze:
                         char = 1
                     line_list.append(int(char))
                 self.Board = np.append(self.Board, [line_list], axis=0)
+            self.number_of_columns = int(self.number_of_columns / self.number_of_lines)
 
         self.ROWS = self.Board.shape[0]
         self.COLS = self.Board.shape[1]
@@ -136,7 +139,7 @@ class Maze:
     def is_wall(self, move):
         if move[0] < 0 or move[1] < 0:
             return True
-        if move[0] >= 10 or move[1] >= 10:
+        if move[0] >= self.number_of_lines or move[1] >= self.number_of_columns:
             return True
         if self.Board[move[0]][move[1]] == self.WALL:
             return True
@@ -146,3 +149,30 @@ class Maze:
 
     def is_floor(self, move):
         return self.Board[move[0]][move[1]] == self.FLOOR
+
+    def decode_chromosome(self, chromosome):
+        list_of_coordinates = []
+        for i in chromosome:
+            self.move_player(i)
+            list_of_coordinates.append(self.playerCurrentPosition)
+        return list_of_coordinates
+
+    def move_player(self, move):
+        if move == 0:
+            return 0
+        elif move == 1:
+            return self.move_player_up()
+        elif move == 2:
+            return self.move_player_down()
+        elif move == 3:
+            return self.move_player_left()
+        elif move == 4:
+            return self.move_player_right()
+        elif move == 5:
+            return self.move_player_up_right()
+        elif move == 6:
+            return self.move_player_up_left()
+        elif move == 7:
+            return self.move_player_down_right()
+        elif move == 8:
+            return self.move_player_down_left()
